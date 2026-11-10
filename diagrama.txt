@@ -1,0 +1,55 @@
+classDiagram
+    class Promocionable {
+        <<interface>>
+        +aplicarDescuento(porcentaje: double) double
+    }
+
+    class Producto {
+        <<abstract>>
+        #id: String
+        #nombre: String
+        #precio: double
+        #stock: int
+        +Producto(id: String, nombre: String, precio: double, stock: int)
+        +calcularValorTotal()* double
+        +mostrarDetalles()* void
+        +actualizarStock(cantidad: int) void
+        +getPrecio() double
+        +setPrecio(precio: double) void
+        +getNombre() String
+    }
+
+    class Electronico {
+        -mesesGarantia: int
+        +Electronico(id: String, nombre: String, precio: double, stock: int, mesesGarantia: int)
+        +calcularValorTotal() double
+        +mostrarDetalles() void
+        +aplicarDescuento(porcentaje: double) double
+    }
+
+    class Alimento {
+        -fechaCaducidad: String
+        +Alimento(id: String, nombre: String, precio: double, stock: int, fechaCaducidad: String)
+        +calcularValorTotal() double
+        +mostrarDetalles() void
+        +aplicarDescuento(porcentaje: double) double
+    }
+
+    class Ropa {
+        -talla: String
+        -material: String
+        +Ropa(id: String, nombre: String, precio: double, stock: int, talla: String, material: String)
+        +calcularValorTotal() double
+        +mostrarDetalles() void
+        +aplicarDescuento(porcentaje: double) double
+    }
+
+    class SistemaInventario {
+        +main(args: String[]) void
+    }
+
+    Promocionable <|.. Producto : implementa
+    Producto <|-- Electronico : hereda
+    Producto <|-- Alimento : hereda
+    Producto <|-- Ropa : hereda
+    SistemaInventario ..> Producto : usa (Polimorfismo)
